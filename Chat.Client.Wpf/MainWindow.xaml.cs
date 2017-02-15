@@ -6,6 +6,7 @@ namespace Chat.Client.Wpf
     using System.Configuration;
     using System.IO;
     using System.Net.Sockets;
+    using System.Text;
     using System.Threading;
     using System.Windows.Controls;
     using System.Windows.Documents;
@@ -13,8 +14,10 @@ namespace Chat.Client.Wpf
     using System.Windows.Input;
     using System.Windows.Media.Imaging;
     using Chat.Utils;
+    using DataFormats = System.Windows.DataFormats;
     using MessageBox = System.Windows.MessageBox;
 
+    //todo: add dynamic packet buffer expansion
     //todo: encrypt data
     //todo: vanish messages
     //todo: settings
@@ -172,6 +175,33 @@ namespace Chat.Client.Wpf
             if (Visibility == Visibility.Visible)
                 Visibility = Visibility.Hidden;
         }
+        private void InputTextBox_Drop(object sender, System.Windows.DragEventArgs e)
+        {
+            return;
+            if(!IsConnected) return;
+
+            String[] files = e.Data.GetData(DataFormats.FileDrop) as String[];
+            if (files == null && files.Length > 1) return;
+
+            String extension = Path.GetExtension(files[0]);
+            MediaType mediaType = Media.GetMediaType(extension);
+
+            switch (mediaType)
+            {
+                case MediaType.Text:
+                    return;
+                case MediaType.Image:
+                    packet.Message = HandleImageDrop(files[0]);
+                    SendMessage(clientStream, packet, MediaType.Image);
+                    break;
+                case MediaType.Document:
+                    break;
+            }
+        }
+        private void InputTextBox_PreviewDragOver(object sender, System.Windows.DragEventArgs e)
+        {
+            e.Handled = true;
+        }
         #endregion
 
         #region Transmission
@@ -209,7 +239,7 @@ namespace Chat.Client.Wpf
                     Packet receivedPacket = Packet.Decode(receivedBytes);
 
                     if (receivedPacket.Flag.Equals("img"))
-                        Dispatcher.Invoke(() => OutputMessage(receivedPacket.ClientName, receivedPacket.Message));
+                        Dispatcher.Invoke(() => OutputMessage(receivedPacket.ClientName, receivedPacket.Message, MediaType.Image));
                     else
                         Dispatcher.Invoke(() => OutputMessage(receivedPacket.ClientName, receivedPacket.Message));
 
@@ -298,7 +328,17 @@ namespace Chat.Client.Wpf
             idRange.ApplyPropertyValue(TextElement.ForegroundProperty, System.Windows.Media.Brushes.Cyan);
 
             BitmapImage bitmap = new BitmapImage();
-             Image image = new Image { Source = bitmap,  Width = 20 };
+            using (var stream = new MemoryStream(imageBytes))
+            {
+                stream.Seek(0, SeekOrigin.Begin);
+                bitmap.CreateOptions = BitmapCreateOptions.PreservePixelFormat;
+                bitmap.CacheOption = BitmapCacheOption.OnLoad;
+                bitmap.BeginInit();
+                bitmap.StreamSource = stream;
+                bitmap.EndInit();
+            }
+
+            Image image = new Image { Source = bitmap,  Width = 20 };
             Figure imageFigure = new Figure() { Width=new FigureLength(100) };
             imageFigure.Blocks.Add(new BlockUIContainer(image));
 
@@ -314,9 +354,10 @@ namespace Chat.Client.Wpf
 
             if (mediaType == MediaType.Text)
                 OutputRichMessage(dateText, identityText, mssg);
-            else
+            else if(mediaType == MediaType.Image)
             {
-                
+                Byte[] imageBytes = Encoding.ASCII.GetBytes(message);
+                OutputRichMessageWithImage(dateText, identityText, imageBytes);
             }
         }
         #endregion
@@ -326,6 +367,31 @@ namespace Chat.Client.Wpf
         {
             Visibility = Visibility.Visible;
             Activate();
+        }
+        #endregion
+
+        #region Media types
+        private String HandleImageDrop(String imagePath)
+        {
+            String imageBytesString = String.Empty;
+
+            try
+            {
+                byte[] imageBytes;
+
+                using (FileStream fstream = File.OpenRead(imagePath))
+                {
+                    imageBytes = new Byte[fstream.Length];
+                    fstream.Read(imageBytes, 0, imageBytes.Length);
+                    imageBytesString = Encoding.ASCII.GetString(imageBytes);
+                }
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message);
+            }
+
+            return imageBytesString;
         }
         #endregion
     }

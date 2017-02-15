@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-E:\TFS\General-PowerPixelSoftware\2017\Standalone\Chat\Chat.Client.Wpf\obj\Debug\
+E:\GIT\2017\Standalone\Chat\Chat.Client.Wpf\obj\Debug\
 Chat.Client.Wpf
 none
 false
 DEBUG;TRACE
-E:\TFS\General-PowerPixelSoftware\2017\Standalone\Chat\Chat.Client.Wpf\App.xaml
-2-381499501
+E:\GIT\2017\Standalone\Chat\Chat.Client.Wpf\App.xaml
+11151548125
 
-10-1531556100
-17-880848630
-MainWindow.xaml;NotificationWindow.xaml;
+9-1006297119
+17606575635
+MainWindow.xaml;
 
-False
+True
 

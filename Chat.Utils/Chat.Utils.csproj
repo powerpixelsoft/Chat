@@ -62,6 +62,7 @@
     <Compile Include="FileLogger.cs" />
     <Compile Include="ILogger.cs" />
     <Compile Include="LoggerData.cs" />
+    <Compile Include="Media.cs" />
     <Compile Include="Packet.cs" />
     <Compile Include="Log.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

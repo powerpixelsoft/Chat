@@ -202,6 +202,12 @@ namespace Chat.Client.Wpf {
             
             #line default
             #line hidden
+            
+            #line 78 "..\..\MainWindow.xaml"
+            this.InputTextBox.Drop += new System.Windows.DragEventHandler(this.InputTextBox_Drop);
+            
+            #line default
+            #line hidden
             return;
             case 11:
             this.SendButton = ((System.Windows.Controls.Button)(target));
