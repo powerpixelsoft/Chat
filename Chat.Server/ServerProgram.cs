@@ -32,7 +32,6 @@ namespace Chat.Server
         private static ILogger logger;
 
 
-
         //todo: crash! if client is stopped on a breakpoint
         //todo: input connection details
         //todo: commands understanding
