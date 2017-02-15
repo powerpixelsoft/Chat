@@ -1,0 +1,12 @@
+E:\GIT\2017\Standalone\Chat\Chat.Client.Wpf\obj\Release\MainWindow.g.cs
+E:\GIT\2017\Standalone\Chat\Chat.Client.Wpf\obj\Release\App.g.cs
+E:\GIT\2017\Standalone\Chat\Chat.Client.Wpf\obj\Release\MainWindow.baml
+E:\GIT\2017\Standalone\Chat\Chat.Client.Wpf\obj\Release\Chat.Client.Wpf.Properties.Resources.resources
+E:\GIT\2017\Standalone\Chat\Chat.Client.Wpf\obj\Release\Chat.Client.Visual.csproj.GenerateResource.Cache
+E:\GIT\2017\Standalone\Chat\Release\Chat.Client.Visual.exe.config
+E:\GIT\2017\Standalone\Chat\Chat.Client.Wpf\obj\Release\Chat.Client.Visual.csprojResolveAssemblyReference.cache
+E:\GIT\2017\Standalone\Chat\Chat.Client.Wpf\obj\Release\Chat.Client.Visual_MarkupCompile.cache
+E:\GIT\2017\Standalone\Chat\Chat.Client.Wpf\obj\Release\Chat.Client.Visual_MarkupCompile.lref
+E:\GIT\2017\Standalone\Chat\Chat.Client.Wpf\obj\Release\Chat.Client.Visual.g.resources
+E:\GIT\2017\Standalone\Chat\Chat.Client.Wpf\obj\Release\Chat.Client.Visual.exe
+E:\GIT\2017\Standalone\Chat\Release\Chat.Client.Visual.exe

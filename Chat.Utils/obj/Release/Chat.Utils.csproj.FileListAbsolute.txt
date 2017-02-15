@@ -1,0 +1,7 @@
+E:\TFS\General-PowerPixelSoftware\2017\Standalone\Chat\Chat.Utils\bin\Release\Chat.Utils.dll.config
+E:\TFS\General-PowerPixelSoftware\2017\Standalone\Chat\Chat.Utils\bin\Release\Chat.Utils.dll
+E:\TFS\General-PowerPixelSoftware\2017\Standalone\Chat\Chat.Utils\obj\Release\Chat.Utils.csprojResolveAssemblyReference.cache
+E:\TFS\General-PowerPixelSoftware\2017\Standalone\Chat\Chat.Utils\obj\Release\Chat.Utils.dll
+E:\GIT\2017\Standalone\Chat\Chat.Utils\bin\Release\Chat.Utils.dll.config
+E:\GIT\2017\Standalone\Chat\Chat.Utils\bin\Release\Chat.Utils.dll
+E:\GIT\2017\Standalone\Chat\Chat.Utils\obj\Release\Chat.Utils.dll

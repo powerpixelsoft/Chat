@@ -1,0 +1,16 @@
+E:\TFS\General-PowerPixelSoftware\2017\Standalone\Chat\Chat.Server\bin\Debug\Chat.Server.exe.config
+E:\TFS\General-PowerPixelSoftware\2017\Standalone\Chat\Chat.Server\bin\Debug\Chat.Server.exe
+E:\TFS\General-PowerPixelSoftware\2017\Standalone\Chat\Chat.Server\bin\Debug\Chat.Server.pdb
+E:\TFS\General-PowerPixelSoftware\2017\Standalone\Chat\Chat.Server\obj\Debug\Chat.Server.csprojResolveAssemblyReference.cache
+E:\TFS\General-PowerPixelSoftware\2017\Standalone\Chat\Chat.Server\obj\Debug\Chat.Server.exe
+E:\TFS\General-PowerPixelSoftware\2017\Standalone\Chat\Chat.Server\obj\Debug\Chat.Server.pdb
+E:\TFS\General-PowerPixelSoftware\2017\Standalone\Chat\Chat.Server\bin\Debug\Chat.Utils.dll
+E:\TFS\General-PowerPixelSoftware\2017\Standalone\Chat\Chat.Server\bin\Debug\Chat.Utils.pdb
+E:\GIT\2017\Standalone\Chat\Chat.Server\bin\Debug\Chat.Server.exe.config
+E:\GIT\2017\Standalone\Chat\Chat.Server\bin\Debug\Chat.Server.exe
+E:\GIT\2017\Standalone\Chat\Chat.Server\bin\Debug\Chat.Server.pdb
+E:\GIT\2017\Standalone\Chat\Chat.Server\bin\Debug\Chat.Utils.dll
+E:\GIT\2017\Standalone\Chat\Chat.Server\bin\Debug\Chat.Utils.pdb
+E:\GIT\2017\Standalone\Chat\Chat.Server\obj\Debug\Chat.Server.csprojResolveAssemblyReference.cache
+E:\GIT\2017\Standalone\Chat\Chat.Server\obj\Debug\Chat.Server.exe
+E:\GIT\2017\Standalone\Chat\Chat.Server\obj\Debug\Chat.Server.pdb

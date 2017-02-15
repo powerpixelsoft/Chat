@@ -1,0 +1,8 @@
+E:\TFS\General-PowerPixelSoftware\2017\Standalone\Chat\Chat.Client\bin\Debug\Chat.Client.exe.config
+E:\TFS\General-PowerPixelSoftware\2017\Standalone\Chat\Chat.Client\bin\Debug\Chat.Client.exe
+E:\TFS\General-PowerPixelSoftware\2017\Standalone\Chat\Chat.Client\bin\Debug\Chat.Client.pdb
+E:\TFS\General-PowerPixelSoftware\2017\Standalone\Chat\Chat.Client\obj\Debug\Chat.Client.csprojResolveAssemblyReference.cache
+E:\TFS\General-PowerPixelSoftware\2017\Standalone\Chat\Chat.Client\obj\Debug\Chat.Client.exe
+E:\TFS\General-PowerPixelSoftware\2017\Standalone\Chat\Chat.Client\obj\Debug\Chat.Client.pdb
+E:\TFS\General-PowerPixelSoftware\2017\Standalone\Chat\Chat.Client\bin\Debug\Chat.Utils.dll
+E:\TFS\General-PowerPixelSoftware\2017\Standalone\Chat\Chat.Client\bin\Debug\Chat.Utils.pdb

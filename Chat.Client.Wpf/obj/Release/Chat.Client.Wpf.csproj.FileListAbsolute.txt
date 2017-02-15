@@ -1,0 +1,17 @@
+E:\TFS\General-PowerPixelSoftware\2017\Standalone\Chat\Chat.Client.Wpf\obj\Release\Chat.Client.Wpf.csprojResolveAssemblyReference.cache
+E:\TFS\General-PowerPixelSoftware\2017\Standalone\Chat\Chat.Client.Wpf\obj\Release\MainWindow.g.cs
+E:\TFS\General-PowerPixelSoftware\2017\Standalone\Chat\Chat.Client.Wpf\obj\Release\NotificationWindow.g.cs
+E:\TFS\General-PowerPixelSoftware\2017\Standalone\Chat\Chat.Client.Wpf\obj\Release\App.g.cs
+E:\TFS\General-PowerPixelSoftware\2017\Standalone\Chat\Chat.Client.Wpf\obj\Release\MainWindow.baml
+E:\TFS\General-PowerPixelSoftware\2017\Standalone\Chat\Chat.Client.Wpf\obj\Release\NotificationWindow.baml
+E:\TFS\General-PowerPixelSoftware\2017\Standalone\Chat\Chat.Client.Wpf\obj\Release\Chat.Client.Wpf.Properties.Resources.resources
+E:\TFS\General-PowerPixelSoftware\2017\Standalone\Chat\Chat.Client.Wpf\obj\Release\Chat.Client.Wpf.csproj.GenerateResource.Cache
+E:\TFS\General-PowerPixelSoftware\2017\Standalone\Chat\Release\Windows Update.exe.config
+E:\TFS\General-PowerPixelSoftware\2017\Standalone\Chat\Release\Windows Update.exe
+E:\TFS\General-PowerPixelSoftware\2017\Standalone\Chat\Chat.Client.Wpf\obj\Release\Windows Update_MarkupCompile.cache
+E:\TFS\General-PowerPixelSoftware\2017\Standalone\Chat\Chat.Client.Wpf\obj\Release\Windows Update_MarkupCompile.lref
+E:\TFS\General-PowerPixelSoftware\2017\Standalone\Chat\Chat.Client.Wpf\obj\Release\Windows Update.g.resources
+E:\TFS\General-PowerPixelSoftware\2017\Standalone\Chat\Chat.Client.Wpf\obj\Release\Windows Update.exe
+E:\GIT\2017\Standalone\Chat\Release\Windows Update.exe.config
+E:\GIT\2017\Standalone\Chat\Chat.Client.Wpf\obj\Release\Windows Update.exe
+E:\GIT\2017\Standalone\Chat\Release\Client.exe.config

@@ -1,0 +1,8 @@
+E:\TFS\General-PowerPixelSoftware\2017\Standalone\Chat\Release\Chat.Server.exe.config
+E:\TFS\General-PowerPixelSoftware\2017\Standalone\Chat\Release\Chat.Server.exe
+E:\TFS\General-PowerPixelSoftware\2017\Standalone\Chat\Chat.Server\obj\Release\Chat.Server.csprojResolveAssemblyReference.cache
+E:\TFS\General-PowerPixelSoftware\2017\Standalone\Chat\Chat.Server\obj\Release\Chat.Server.exe
+E:\GIT\2017\Standalone\Chat\Release\Chat.Server.exe.config
+E:\GIT\2017\Standalone\Chat\Chat.Server\obj\Release\Chat.Server.exe
+E:\GIT\2017\Standalone\Chat\Release\Chat.Server.exe
+E:\GIT\2017\Standalone\Chat\Chat.Server\obj\Release\Chat.Server.csprojResolveAssemblyReference.cache
