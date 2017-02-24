@@ -20,10 +20,10 @@ namespace Chat.Utils
         {
             List<Byte> data = new List<Byte>();
 
-            Byte[] ipBytes = Encoding.ASCII.GetBytes(Ip);
-            Byte[] nameBytes = Encoding.ASCII.GetBytes(ClientName);
-            Byte[] messageBytes = Encoding.ASCII.GetBytes(Message);
-            Byte[] flagBytes = Encoding.ASCII.GetBytes(Flag);
+            Byte[] ipBytes = Encoding.UTF8.GetBytes(Ip);
+            Byte[] nameBytes = Encoding.UTF8.GetBytes(ClientName);
+            Byte[] messageBytes = Encoding.UTF8.GetBytes(Message);
+            Byte[] flagBytes = Encoding.UTF8.GetBytes(Flag);
 
             Byte[] ipBytes_length = BitConverter.GetBytes(ipBytes.Length);
             Byte[] ipBytes_pos = BitConverter.GetBytes(32);
@@ -61,10 +61,10 @@ namespace Chat.Utils
         {
             Packet packet = new Packet();
 
-            packet.Ip = Encoding.ASCII.GetString(ExtractData(dataBytes, 0, 4));
-            packet.ClientName = Encoding.ASCII.GetString(ExtractData(dataBytes, 8, 12));
-            packet.Message = Encoding.ASCII.GetString(ExtractData(dataBytes, 16, 20));
-            packet.Flag = Encoding.ASCII.GetString(ExtractData(dataBytes, 24, 28));
+            packet.Ip = Encoding.UTF8.GetString(ExtractData(dataBytes, 0, 4));
+            packet.ClientName = Encoding.UTF8.GetString(ExtractData(dataBytes, 8, 12));
+            packet.Message = Encoding.UTF8.GetString(ExtractData(dataBytes, 16, 20));
+            packet.Flag = Encoding.UTF8.GetString(ExtractData(dataBytes, 24, 28));
             packet.DataBytes = dataBytes;
 
             return packet;

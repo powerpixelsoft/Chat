@@ -14,7 +14,9 @@ namespace Chat.Client.Wpf
     using System.Windows.Input;
     using System.Windows.Media.Imaging;
     using Chat.Utils;
+    using ContextMenu = System.Windows.Forms.ContextMenu;
     using DataFormats = System.Windows.DataFormats;
+    using MenuItem = System.Windows.Forms.MenuItem;
     using MessageBox = System.Windows.MessageBox;
 
     //todo: add dynamic packet buffer expansion
@@ -33,7 +35,7 @@ namespace Chat.Client.Wpf
         private TcpClient tcpClient;
         private Stream clientStream;
 
-        private Thread receiveMessagesThread;
+        private Thread receiveMessagesThread, trayIconThread;
         private volatile Boolean isSending = true, isReceiving = true;
 
         public Boolean IsConnected => tcpClient != null && tcpClient.Connected;
@@ -41,7 +43,12 @@ namespace Chat.Client.Wpf
         private Packet packet;
         private NotifyIcon notifyIcon = null;
 
+        private ContextMenu trayContextMenu;
+        private MenuItem trayOpenMenuItem, trayCloseMenuItem, trayExitMenuItem;
         private String notificationText, notificationTitle;
+
+        private PasswordConfirmWindow passwordWindow;
+
 
         #region Initialization
         public MainWindow()
@@ -53,10 +60,9 @@ namespace Chat.Client.Wpf
         {
             logger = new FileLogger(@"C:\Temp\PopeChat\ClientWpf.txt");
 
-            notifyIcon = new NotifyIcon();
-            notifyIcon.Click += (s, a) => RestoreWindow();
-            notifyIcon.Visible = true;
-            notifyIcon.Icon = Properties.Resources.ChatWindowsIcon;
+            //tray icon
+            trayIconThread = new Thread(StartTrayIconThread);
+            trayIconThread.Start();
 
             IpTextBox.Text = ConfigurationManager.AppSettings["default_ip"];
             PortTextBox.Text = ConfigurationManager.AppSettings["default_port"];
@@ -67,24 +73,76 @@ namespace Chat.Client.Wpf
             ShowInTaskbar = false;
 
             OutputRichTextBox?.Document.Blocks.Clear();
+
+            //Microsoft.VisualBasic.Interaction.InputBox("Question?", "Title", "Default Text");
+        }
+        private void StartTrayIconThread()
+        {
+            trayContextMenu = new ContextMenu();
+
+            trayOpenMenuItem = new MenuItem("Open");
+            trayCloseMenuItem = new MenuItem("Close");
+            trayExitMenuItem = new MenuItem("Exit");
+
+            trayContextMenu.MenuItems.Add(0, trayOpenMenuItem);
+            trayContextMenu.MenuItems.Add(1, trayCloseMenuItem);
+            trayContextMenu.MenuItems.Add("-");
+            trayContextMenu.MenuItems.Add(2, trayExitMenuItem);
+
+            notifyIcon = new NotifyIcon
+            {
+                Visible = true,
+                Icon = Properties.Resources.ChatWindowsIcon,
+                Text = ConfigurationManager.AppSettings["default_notification_title"],
+                ContextMenu = trayContextMenu
+            };
+
+            notifyIcon.BalloonTipClicked += (sender, args) =>
+            {
+                Dispatcher.Invoke
+                (
+                    () =>
+                    {
+                        passwordWindow = new PasswordConfirmWindow(ConfigurationManager.AppSettings["default_password"], () => SetWindowVisible(true));
+                        passwordWindow.Show();
+                    }
+                );
+            };
+
+            trayOpenMenuItem.Click += (sender, args) =>
+            {
+                Dispatcher.Invoke
+                (
+                    () =>
+                    {
+                        passwordWindow = new PasswordConfirmWindow(ConfigurationManager.AppSettings["default_password"], () => SetWindowVisible(true));
+                        passwordWindow.Show();
+                    }
+                );
+            };
+
+            trayCloseMenuItem.Click += (sender, args) =>
+            {
+                SetWindowVisible(false);
+            };
+
+            trayExitMenuItem.Click += (sender, args) =>
+            {
+                notifyIcon.Dispose();
+                Environment.Exit(0);
+            };
+
+           Application.Run();
         }
         private TcpClient Connect(String ip, Int32 port)
         {
-            try
-            {
-                TcpClient client = new TcpClient();
-                client.Connect(ip, port);
-                clientStream = client.GetStream();
+            TcpClient client = new TcpClient();
+            client.Connect(ip, port);
+            clientStream = client.GetStream();
 
-                //OutputInfo("ClientProgram is online");
-                OutputRichInfo("ClientProgram is online");
+            OutputRichInfo("ClientProgram is online");
 
-                return client;
-            }
-            catch (Exception e)
-            {
-                throw;
-            }
+            return client;
         }
         #endregion
 
@@ -101,7 +159,6 @@ namespace Chat.Client.Wpf
                 String.IsNullOrEmpty(ClientName) ||
                 Port <= 0)
             {
-                //OutputInfo("Configuration is not complete. Check the fields and format of the data.");
                 OutputRichInfo("Configuration is not complete. Check the fields and format of the data.");
                 return;
             }
@@ -115,7 +172,6 @@ namespace Chat.Client.Wpf
                 receiveMessagesThread = new Thread(ReceiveRoutine);
                 receiveMessagesThread.Start();
 
-                //OutputInfo("[Receive] thread is ON");
                 OutputRichInfo("[Receive] thread is ON");
             }
             catch (Exception exception)
@@ -159,21 +215,24 @@ namespace Chat.Client.Wpf
         }
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            if (!IsConnected) return;
+            if (!IsConnected)
+            {
+                notifyIcon.Dispose();
+                Environment.Exit(0);
+            }
+            else
+            {
+                isReceiving = false;
+                SendMessage(clientStream,
+                    packet = new Packet { ClientName = ClientName, Ip = Ip, Message = $"{ClientName} is disconnected.", Flag = "end" });
 
-            isReceiving = false;
-            SendMessage(clientStream,
-                packet = new Packet { ClientName = ClientName, Ip = Ip, Message = $"{ClientName} is disconnected.", Flag = "end" });
-
-            notifyIcon.Visible = false;
-            notifyIcon = null;
-
-            Environment.Exit(0);
+                notifyIcon.Dispose();
+                Environment.Exit(0);
+            }           
         }
         private void HideButton_Click(object sender, RoutedEventArgs e)
         {
-            if (Visibility == Visibility.Visible)
-                Visibility = Visibility.Hidden;
+            SetWindowVisible(false);
         }
         private void InputTextBox_Drop(object sender, System.Windows.DragEventArgs e)
         {
@@ -201,6 +260,14 @@ namespace Chat.Client.Wpf
         private void InputTextBox_PreviewDragOver(object sender, System.Windows.DragEventArgs e)
         {
             e.Handled = true;
+        }
+        private void Window_KeyUp(object sender, System.Windows.Input.KeyEventArgs e)
+        {
+            if (e.Key == Key.F12)
+            {
+                if (Visibility == Visibility.Visible)
+                    Visibility = Visibility.Hidden;
+            }
         }
         #endregion
 
@@ -368,6 +435,29 @@ namespace Chat.Client.Wpf
             Visibility = Visibility.Visible;
             Activate();
         }
+        private void SetWindowVisible(Boolean isVisible)
+        {
+            if (isVisible)
+            {
+                Dispatcher.Invoke(() =>
+                {
+                    Visibility = Visibility.Visible;
+                    Activate();
+
+                    passwordWindow?.Close();
+                    passwordWindow = null;
+                });
+            }
+            else
+            {
+                Dispatcher.Invoke(() =>
+                {
+                    if (Visibility == Visibility.Visible)
+                        Visibility = Visibility.Hidden;
+                });
+            }
+        }
+
         #endregion
 
         #region Media types

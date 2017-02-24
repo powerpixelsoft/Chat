@@ -14,3 +14,5 @@ E:\GIT\2017\Standalone\Chat\Chat.Client.Wpf\obj\Debug\Chat.Client.Visual_MarkupC
 E:\GIT\2017\Standalone\Chat\Chat.Client.Wpf\obj\Debug\Chat.Client.Visual.g.resources
 E:\GIT\2017\Standalone\Chat\Chat.Client.Wpf\obj\Debug\Chat.Client.Visual.exe
 E:\GIT\2017\Standalone\Chat\Chat.Client.Wpf\obj\Debug\Chat.Client.Visual.pdb
+E:\GIT\2017\Standalone\Chat\Chat.Client.Wpf\obj\Debug\PasswordConfirmWindow.g.cs
+E:\GIT\2017\Standalone\Chat\Chat.Client.Wpf\obj\Debug\PasswordConfirmWindow.baml

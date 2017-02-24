@@ -10,3 +10,5 @@ E:\GIT\2017\Standalone\Chat\Chat.Client.Wpf\obj\Release\Chat.Client.Visual_Marku
 E:\GIT\2017\Standalone\Chat\Chat.Client.Wpf\obj\Release\Chat.Client.Visual.g.resources
 E:\GIT\2017\Standalone\Chat\Chat.Client.Wpf\obj\Release\Chat.Client.Visual.exe
 E:\GIT\2017\Standalone\Chat\Release\Chat.Client.Visual.exe
+E:\GIT\2017\Standalone\Chat\Chat.Client.Wpf\obj\Release\PasswordConfirmWindow.g.cs
+E:\GIT\2017\Standalone\Chat\Chat.Client.Wpf\obj\Release\PasswordConfirmWindow.baml

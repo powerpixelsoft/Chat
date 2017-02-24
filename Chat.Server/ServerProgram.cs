@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Runtime.InteropServices;
 
 namespace Chat.Server
 {
@@ -10,14 +11,13 @@ namespace Chat.Server
     using System.Configuration;
     using System.Net;
     using System.Net.Sockets;
+    using System.Runtime.InteropServices;
     using System.Threading;
     using System.Windows.Forms;
     using Utils;
 
     internal class ServerProgram
     {
-        private const int PORT = 1473;
-        private const String IP = "192.168.178.28";
         private static TcpListener serverListener;
 
         private static Boolean isAlive = true, isBroadcasting = true, acceptingMessages = true;
@@ -31,14 +31,73 @@ namespace Chat.Server
 
         private static ILogger logger;
 
+        private static Thread trayIconThread;
+        private static ContextMenu trayContextMenu;
+        private static MenuItem trayOpenMenuItem, trayCloseMenuItem, trayExitMenuItem;
+        private static NotifyIcon trayIcon;
+
+        private static int CW_SHOW = 5, CW_HIDE = 0;
+        private static IntPtr consoleWindowHandlePtr;
+
         //todo: git
         //todo: crash! if client is stopped on a breakpoint
         //todo: input connection details
         //todo: commands understanding
         //todo: cleanup!
         //todo: check if a client with the same name already exists, so something about it
+        //todo: add password check if Open console winfow again
 
-        static void Main(String[] args)
+        static void Main()
+        {
+            consoleWindowHandlePtr = GetConsoleWindow();
+            ShowWindow(consoleWindowHandlePtr, CW_HIDE);
+
+            trayIconThread = new Thread(StartTrayIconProgram);
+            trayIconThread.Start();
+
+            StartServerProgram();
+        }
+
+        private static void StartTrayIconProgram()
+        {
+            trayContextMenu = new ContextMenu();
+
+            trayOpenMenuItem = new MenuItem("Open");
+            trayCloseMenuItem = new MenuItem("Close");
+            trayExitMenuItem = new MenuItem("Exit");
+
+            trayContextMenu.MenuItems.Add(0, trayOpenMenuItem);
+            trayContextMenu.MenuItems.Add(1, trayCloseMenuItem);
+            trayContextMenu.MenuItems.Add("-");
+            trayContextMenu.MenuItems.Add(3, trayExitMenuItem);
+
+            trayIcon = new NotifyIcon
+            {
+                Icon = Properties.Resources.ChatWindowsIconServer,
+                ContextMenu = trayContextMenu,
+                Text = ConfigurationManager.AppSettings["trayTitleText"],
+                Visible = true
+            };
+
+            trayOpenMenuItem.Click += (sender, args) =>
+            {
+                ShowWindow(consoleWindowHandlePtr, CW_SHOW);
+            };
+
+            trayCloseMenuItem.Click += (sender, args) =>
+            {
+                ShowWindow(consoleWindowHandlePtr, CW_HIDE);
+            };
+
+            trayExitMenuItem.Click += (sender, args) =>
+            {
+                trayIcon.Dispose();
+                Environment.Exit(0);
+            };
+
+            Application.Run();
+        }
+        private static void StartServerProgram()
         {
             logger = new FileLogger(@"C:\Temp\PopeChat\Server.txt");
 
@@ -53,6 +112,7 @@ namespace Chat.Server
 
                 //accept connections
                 acceptConnectionsThread = new Thread(AcceptConnections);
+                acceptConnectionsThread.IsBackground = true;
                 acceptConnectionsThread.Start();
 
                 Broadcast();
@@ -95,6 +155,8 @@ namespace Chat.Server
             clientsThreads = new List<Thread>();
             packetStack = new ConcurrentStack<Packet>();
             clients = new ThreadSafeCollection<Client>();
+
+            Console.OutputEncoding = Encoding.Unicode;
         }
 
         private static void AcceptConnections()
@@ -248,6 +310,11 @@ namespace Chat.Server
                 }
             }
         }
+
+        [DllImport("kernel32.dll")]
+        private static extern IntPtr GetConsoleWindow();
+        [DllImport("user32.dll")]
+        private static extern IntPtr ShowWindow(IntPtr windowHandlePtr, int state);
     }
 }
 
