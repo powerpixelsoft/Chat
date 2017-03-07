@@ -103,8 +103,22 @@ namespace Chat.Client.Wpf
                 (
                     () =>
                     {
-                        passwordWindow = new PasswordConfirmWindow(ConfigurationManager.AppSettings["default_password"], () => SetWindowVisible(true));
-                        passwordWindow.Show();
+                        if (IsVisible)
+                        {
+                            Activate();
+                            InputTextBox.Focus();
+                        }
+                        else
+                        {
+                            passwordWindow = new PasswordConfirmWindow(ConfigurationManager.AppSettings["default_password"],
+                            () =>
+                            {
+                                Activate();
+                                InputTextBox.Focus();
+                                SetWindowVisible(true);
+                            });
+                            passwordWindow.Show();
+                        }
                     }
                 );
             };
@@ -115,8 +129,22 @@ namespace Chat.Client.Wpf
                 (
                     () =>
                     {
-                        passwordWindow = new PasswordConfirmWindow(ConfigurationManager.AppSettings["default_password"], () => SetWindowVisible(true));
-                        passwordWindow.Show();
+                        if (IsVisible)
+                        {
+                            Activate();
+                            InputTextBox.Focus();
+                        }
+                        else
+                        {
+                            passwordWindow = new PasswordConfirmWindow(ConfigurationManager.AppSettings["default_password"],
+                            () =>
+                            {
+                                Activate();
+                                InputTextBox.Focus();
+                                SetWindowVisible(true);
+                            });
+                            passwordWindow.Show();
+                        }
                     }
                 );
             };
