@@ -110,7 +110,7 @@ namespace Chat.Client.Wpf
                         }
                         else
                         {
-                            passwordWindow = new PasswordConfirmWindow(ConfigurationManager.AppSettings["default_password"],
+                            passwordWindow = passwordWindow ?? new PasswordConfirmWindow(ConfigurationManager.AppSettings["default_password"],
                             () =>
                             {
                                 Activate();
@@ -136,7 +136,7 @@ namespace Chat.Client.Wpf
                         }
                         else
                         {
-                            passwordWindow = new PasswordConfirmWindow(ConfigurationManager.AppSettings["default_password"],
+                            passwordWindow = passwordWindow ?? new PasswordConfirmWindow(ConfigurationManager.AppSettings["default_password"],
                             () =>
                             {
                                 Activate();
